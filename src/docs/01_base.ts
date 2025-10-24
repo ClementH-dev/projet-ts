@@ -1,0 +1,73 @@
+// 1) Variables immuables / muables
+const immutableVar = "Je ne peux pas changer"; // préférer const quand possible
+let mutableVar = "Je peux changer";
+mutableVar = "Changement effectué";
+
+// 2) Types primitifs
+const message: string = "Hello, TypeScript!";
+const prix: number = 19.99;
+const disponible: boolean = true;
+
+// 3) any vs unknown
+// `any` désactive le contrôle de type (éviter si possible).
+const listeAny: any = [1, "deux", true];
+// `unknown` est sûr : il oblige à vérifier/affirmer le type avant d'utiliser.
+const valeurInconnue: unknown = "une chaîne";
+
+// Exemple de vérification pour `unknown`
+if (typeof valeurInconnue === "string") {
+  // TypeScript infère `valeurInconnue` comme string dans ce bloc
+  const longueur = valeurInconnue.length;
+}
+
+// 4) Tableaux et tuples
+const fruits: string[] = ["pomme", "banane", "orange"];
+const nombres: Array<number> = [1, 2, 3, 4, 5];
+const duo: [string, number] = ["Alice", 30];
+console.log(`Nom: ${duo[0]}, Âge: ${duo[1]}`);
+
+// 5) Objets
+const personne: { nom: string; age: number } = { nom: "Bob", age: 25 };
+
+// 6) Void
+function helloWorld(nom: string): void {
+  console.log(`Hello, ${nom}!`);
+}
+helloWorld("World"); //Une fonction void ne retourne rien
+
+// 7) Never
+function lancerErreur(message: string): never {
+  throw new Error(message);
+}
+// lancerErreur("Ceci est une erreur!"); // Une fonction never ne termine jamais normalement
+
+// 8) Typage génériques
+function identite<T>(valeur: T): T {
+  return valeur;
+}
+
+identite<string>("Bonjour"); //T = string
+identite<number>(42); //T = number
+
+// 8.1) Typage générique avec tableaux
+function getFirstString<T>(arr: T[]): T {
+  return arr[0];
+}
+
+const a = getFirstString<string>(["Alice", "Bob", "Charlie"]); //T = string
+const b = getFirstString<number>([10, 20, 30]); //T = number
+
+// 9) Inférence de types
+let nombreInfere = 100; // TypeScript infère que c'est un number
+// nombreInfere = "cent"; // Erreur : Type 'string' n'est pas assignable au type 'number'
+
+function addition(a: number, b: number) {
+  // a et un number et b aussi donc typescript comprend que la fonction retourne un number
+  return a + b;
+}
+
+let resultat = addition(5, 10);
+
+let total; //Type any implicite ATTENTION à éviter
+total = 50;
+total = "cinquante";
