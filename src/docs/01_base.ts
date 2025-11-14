@@ -126,11 +126,39 @@ console.log(`propA: ${objetC.propA}, propB: ${objetC.propB}`);
  * @param a - Le premier nombre.
  * @param b - Le deuxième nombre.
  * @returns La somme de a et b.
+ * @example
+ * ```
+ * const resultat = somme(5, 10);
+ * console.log(resultat); // Affiche 15
+ * ```
+ * @deprecated Utilisez la fonction `addition` à la place.
+ * @throws {Error} Lance une erreur si les arguments ne sont pas des nombres.
+ * @see {@link addition} pour une fonction similaire.
  */
 function somme(a: number, b: number): number {
   return a + b;
 }
 
 console.log(`La somme de 5 et 10 est: ${somme(5, 10)}`);
+
+// TypeDoc permet de générer automatiquement la documentation à partir des commentaires JSDoc.
+// npm install typedoc --save-dev
+
+// Ajouter un script dans package.json:
+// "scripts": {
+//   "docs": "typedoc"
+// }
+
+// Configurer TypeDoc via un fichier typedoc.json
+// {
+//   "entryPoints": ["src/main.ts"],
+//   "out": "docs",
+//   "exclude": "**/node_modules/**",
+//   "includeVersion": true
+//   "theme": "default"
+// }
+
+// Puis exécuter:
+// npm run docs
 
 
