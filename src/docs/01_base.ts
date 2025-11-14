@@ -120,4 +120,17 @@ const objetC: C = {
 
 console.log(`propA: ${objetC.propA}, propB: ${objetC.propB}`);
 
+// 11) JSDOC
+/**
+ * Calcule la somme de deux nombres.
+ * @param a - Le premier nombre.
+ * @param b - Le deuxième nombre.
+ * @returns La somme de a et b.
+ */
+function somme(a: number, b: number): number {
+  return a + b;
+}
+
+console.log(`La somme de 5 et 10 est: ${somme(5, 10)}`);
+
 
