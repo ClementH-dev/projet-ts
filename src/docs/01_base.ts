@@ -25,6 +25,11 @@ const fruits: string[] = ["pomme", "banane", "orange"];
 const nombres: Array<number> = [1, 2, 3, 4, 5];
 const duo: [string, number] = ["Alice", 30];
 console.log(`Nom: ${duo[0]}, Âge: ${duo[1]}`);
+// Readonly tuple
+const trio: readonly [string, number, boolean] = ["Bob", 25, true];
+// trio[0] = "Charlie"; // Erreur : impossible de modifier un tuple en lecture seule
+// Tuple + Labels
+const coordonnees: [x: number, y: number] = [10, 20];
 
 // 5) Objets
 const personne: { nom: string; age: number } = { nom: "Bob", age: 25 };
@@ -71,3 +76,48 @@ let resultat = addition(5, 10);
 let total; //Type any implicite ATTENTION à éviter
 total = 50;
 total = "cinquante";
+
+// 9) Union et narrowing
+let unionVar: string | number;
+unionVar = "Ceci est une chaîne";
+unionVar = 12345;
+// unionVar = true; // Erreur : Type 'boolean' n'est pas assignable au type 'string | number'
+
+type ID = string | number;
+function afficherID(id: ID): void {
+  console.log(`ID: ${id}`);
+}
+
+afficherID("abc123");
+afficherID(456789);
+
+// 9.1) Narrowing
+function formatId(id: string | number): string {
+  if (typeof id === "number") {
+    return "#" + id.toString();
+  }
+  return id.toUpperCase();
+}
+
+console.log(formatId("abc123")); // "ABC123"
+console.log(formatId(456)); // "#456"
+
+// 10) Intersection de types
+interface A {
+  propA: string;
+}
+
+interface B {
+  propB: number;
+}
+
+type C = A & B;
+// Objet de type C doit avoir les propriétés de A et B
+const objetC: C = {
+  propA: "Valeur A",
+  propB: 42,
+};
+
+console.log(`propA: ${objetC.propA}, propB: ${objetC.propB}`);
+
+
